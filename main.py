@@ -41,10 +41,12 @@ def home():
 @app.post("/start-server", response_class=HTMLResponse)
 def start_server():
     # subprocess ile arka planda başlat
-    subprocess.Popen(
+    result = subprocess.run(
         ["sudo", "systemctl", "start", "minecraft.service"],
+        capture_output=True, text=True, encoding="utf-8"
     )
-    return "<h2>Sunucu başlatıldı!</h2><a href='/'>Geri Dön</a>"
+
+    return f"<p>{result.stdout}</p><br><h2>Sunucu başlatıldı!</h2><a href='/'>Geri Dön</a>"
 
 # Sunucuyu durdurma endpoint'i
 @app.post("/stop-server", response_class=HTMLResponse)
