@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Yönetimi</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Minecraft Server Yönetimi</h1>
+        <p id="serverStatus">
+            Durum: 
+            {% if server_running %}
+                <span class="running">ÇALIŞIYOR</span>
+            {% else %}
+                <span class="stopped">DURDURULMUŞ</span>
+            {% endif %}
+        </p>
+    </header>
+
+    <main>
+        <section class="controls">
+            <h2>Sunucu Kontrolleri</h2>
+            <button id="startBtn">Sunucuyu Başlat</button>
+            <button id="stopBtn">Sunucuyu Durdur</button>
+            <button id="restartBtn">Sunucuyu Yeniden Başlat</button>
+        </section>
+
+        <section class="logs">
+            <h2>Sunucu Logları</h2>
+            <pre id="logArea">Loglar burada görüntülenecek...</pre>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Minecraft Server Yönetimi</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -70,3 +70,13 @@ footer {
     background-color: #333;
     margin-top: 20px;
 }
+
+.running {
+    color: #2ecc71; /* yeşil */
+    font-weight: bold;
+}
+
+.stopped {
+    color: #e74c3c; /* kırmızı */
+    font-weight: bold;
+}
