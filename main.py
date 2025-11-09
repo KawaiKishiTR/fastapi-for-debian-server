@@ -58,23 +58,23 @@ def restart_server():
 
 
 @app.websocket("/ws/logs")
-async def websocket_logs(ws: WebSocket):
-    await ws.accept()
+async def websocket_logs(websocket: WebSocket):
+    await websocket.accept()
     process = await asyncio.create_subprocess_exec(
-        "journalctl", "-fu", "minecraft.service",
+        "journalctl", "-u", "minecraft.service", "-f", "-n", "20",
         stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE
+        stderr=asyncio.subprocess.PIPE,
     )
     try:
         while True:
             line = await process.stdout.readline()
             if not line:
                 break
-            await ws.send_text(line.decode('utf-8'))
+            await websocket.send_text(line.decode("utf-8"))
     except Exception as e:
-        print("WebSocket disconnected:", e)
+        await websocket.send_text(f"[ERROR] {e}")
     finally:
-        process.kill()
+        process.terminate()
         await process.wait()
 
 # === SUNUCU DURUMU SORGULAMA ===
