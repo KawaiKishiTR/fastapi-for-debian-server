@@ -70,7 +70,8 @@ async def websocket_logs(websocket: WebSocket):
             line = await process.stdout.readline()
             if not line:
                 break
-            await websocket.send_text(line.decode("utf-8"))
+            line = line.decode("utf-8").split(":", 3)[-1][1:]
+            await websocket.send_text(line)
     except Exception as e:
         await websocket.send_text(f"[ERROR] {e}")
     finally:
