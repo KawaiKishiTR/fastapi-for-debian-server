@@ -1,0 +1,72 @@
+/* Genel ayarlar */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #f39c12;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+section {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+h2 {
+    color: #f39c12;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f39c12;
+    color: #1a1a1a;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #d68910;
+}
+
+.logs pre {
+    background-color: #111;
+    padding: 10px;
+    border-radius: 5px;
+    height: 300px;
+    overflow-y: scroll;
+    font-family: monospace;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    margin-top: 20px;
+}

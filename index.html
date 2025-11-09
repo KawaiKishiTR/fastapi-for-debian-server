@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Yönetimi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Minecraft Server Yönetimi</h1>
+    </header>
+
+    <main>
+        <section class="controls">
+            <h2>Sunucu Kontrolleri</h2>
+            <button id="startBtn">Sunucuyu Başlat</button>
+            <button id="stopBtn">Sunucuyu Durdur</button>
+            <button id="restartBtn">Sunucuyu Yeniden Başlat</button>
+        </section>
+
+        <section class="logs">
+            <h2>Sunucu Logları</h2>
+            <pre id="logArea">Loglar burada görüntülenecek...</pre>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Minecraft Server Yönetimi</p>
+    </footer>
+
+    <script>
+        // Basit örnek: butonlara tıklayınca alert gösterir
+    document.getElementById('startBtn').addEventListener('click', async () => {
+        const res = await fetch('/start-server', { method: 'POST' });
+        const data = await res.json();
+        console.log(data.status);
+    });
+
+    document.getElementById('stopBtn').addEventListener('click', async () => {
+        const res = await fetch('/stop-server', { method: 'POST' });
+        const data = await res.json();
+        console.log(data.status);
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', async () => {
+        const res = await fetch('/restart-server', { method: 'POST' });
+        const data = await res.json();
+        console.log(data.status);
+    });
+    const logArea = document.getElementById('logArea');
+    const ws = new WebSocket(`ws://${window.location.host}/ws/logs`);
+
+    ws.onmessage = function(event) {
+        logArea.textContent += event.data;  // Log satırlarını ekle
+        logArea.scrollTop = logArea.scrollHeight; // Otomatik scroll
+    };
+        // Logları backend’den çekmek için örnek fetch:
+        // setInterval(() => {
+        //     fetch('/api/logs')
+        //         .then(res => res.text())
+        //         .then(data => document.getElementById('logArea').textContent = data);
+        // }, 2000);
+    </script>
+</body>
+</html>
