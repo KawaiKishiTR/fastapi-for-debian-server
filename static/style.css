@@ -132,11 +132,11 @@ canvas {
     border-radius: 8px;
     padding: 20px;
     margin: 10px 0;
-    width: 100%;
+    width: 98%;
 }
 
 #cmdInput {
-    width: 70%;
+    width: 92%;
     padding: 10px;
     background-color: #111;
     border: 1px solid #333;
