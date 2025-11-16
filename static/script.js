@@ -42,6 +42,24 @@ document.getElementById('restartBtn').addEventListener('click', async () => {
     await updateStatus();
 });
 
+async function updateMetrics() {
+    try {
+        const res = await fetch('/metrics');
+        const data = await res.json();
+
+        document.getElementById('cpuUsage').textContent = data.cpu + "%";
+        document.getElementById('ramUsage').textContent =
+            `${(data.memory_used / (1024**3)).toFixed(2)} GB / ${(data.memory_total / (1024**3)).toFixed(2)} GB (${data.memory_percent}%)`;
+
+    } catch (e) {
+        console.error("Metrics fetch failed:", e);
+    }
+}
+
+// Her 3 saniyede bir güncelle
+setInterval(updateMetrics, 3000);
+updateMetrics();
+
 // Sunucu durumunu periyodik güncelle
 setInterval(updateStatus, 5000);
 updateStatus();

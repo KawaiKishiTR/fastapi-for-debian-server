@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import subprocess
 import asyncio
+import psutil
 
 app = FastAPI()
 
@@ -14,11 +15,11 @@ templates = Jinja2Templates(directory="templates")
 
 
 
-def run_server():
+def start_server_():
     subprocess.Popen(
         ["sudo", "systemctl", "start", "minecraft"],
     )
-def kill_server():
+def stop_server_():
     subprocess.Popen(
         ["sudo", "systemctl", "stop", "minecraft"]
     )
@@ -41,15 +42,27 @@ async def get_root(request: Request):
     )
 
 
+@app.get("/metrics")
+async def metrics():
+    cpu = psutil.cpu_percent(interval=0.1)
+    mem = psutil.virtual_memory()
+
+    return {
+        "cpu":cpu,
+        "memory_used":mem.used,
+        "memory_total":mem.total,
+        "memory_percent":mem.percent
+    }
+
 @app.post("/start-server")
 def start_server():
     # subprocess ile arka planda başlat
-    run_server()
+    start_server_()
     return {"status":"started"}
 @app.post("/stop-server")
 def stop_server():
     # subprocess ile durdur
-    kill_server()
+    stop_server_()
     return {"status": "stopped"}
 @app.post("/restart-server")
 def restart_server():
