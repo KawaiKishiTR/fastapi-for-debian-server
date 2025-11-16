@@ -47,24 +47,25 @@ async function updateMetrics() {
         const res = await fetch('/metrics');
         const data = await res.json();
 
-        // Ekrandaki basit değer güncellemesi
-        document.getElementById('cpuUsage').textContent = data.cpu + "%";
-        document.getElementById('ramUsage').textContent =
-            `${(data.memory_used / (1024**3)).toFixed(2)} GB / ${(data.memory_total / (1024**3)).toFixed(2)} GB (${data.memory_percent}%)`;
+    cpuHistory.push(data.cpu);
+    if (cpuHistory.length > 100) cpuHistory.shift();
 
-        // === Buffer güncelleme ===
-        cpuHistory.push(data.cpu);
-        if (cpuHistory.length > 100) cpuHistory.shift();
+    ramHistory.push(data.memory_percent);
+    if (ramHistory.length > 100) ramHistory.shift();
 
-        ramHistory.push(data.memory_percent);
-        if (ramHistory.length > 100) ramHistory.shift();
+    // === Grafik başlıklarını güncelle ===
+    cpuChart.options.plugins.title.text =
+        `CPU (%) — Anlık: ${data.cpu}%`;
 
-        // === Grafik güncelle ===
-        cpuChart.data.datasets[0].data = cpuHistory;
-        cpuChart.update();
+    ramChart.options.plugins.title.text =
+        `RAM (%) — Anlık: ${data.memory_percent}% (${(data.memory_used / (1024**3)).toFixed(2)} GB / ${(data.memory_total / (1024**3)).toFixed(2)} GB)`;
 
-        ramChart.data.datasets[0].data = ramHistory;
-        ramChart.update();
+    // === Grafik veri güncelleme ===
+    cpuChart.data.datasets[0].data = cpuHistory;
+    cpuChart.update();
+
+    ramChart.data.datasets[0].data = ramHistory;
+    ramChart.update();
 
     } catch (e) {
         console.error("Metrics fetch failed:", e);
@@ -92,12 +93,21 @@ const cpuChart = new Chart(cpuCtx, {
         }]
     },
     options: {
+        plugins: {
+            title: {
+                display: true,
+                text: "CPU (%) — Anlık: 0%",
+                color: "#f39c12",
+                font: { size: 16 }
+            }
+        },
         animation: false,
         scales: {
             y: { beginAtZero: true, max: 100 }
         }
     }
 });
+
 
 const ramChart = new Chart(ramCtx, {
     type: 'line',
@@ -111,12 +121,21 @@ const ramChart = new Chart(ramCtx, {
         }]
     },
     options: {
+        plugins: {
+            title: {
+                display: true,
+                text: "RAM (%) — Anlık: 0% (0 GB / 0 GB)",
+                color: "#f39c12",
+                font: { size: 16 }
+            }
+        },
         animation: false,
         scales: {
             y: { beginAtZero: true, max: 100 }
         }
     }
 });
+
 
 
 // Her 3 saniyede bir güncelle
