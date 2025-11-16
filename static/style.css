@@ -88,3 +88,22 @@ footer {
     margin: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
+
+.charts {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    margin-bottom: 25px;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}

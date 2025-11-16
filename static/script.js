@@ -47,14 +47,77 @@ async function updateMetrics() {
         const res = await fetch('/metrics');
         const data = await res.json();
 
+        // Ekrandaki basit değer güncellemesi
         document.getElementById('cpuUsage').textContent = data.cpu + "%";
         document.getElementById('ramUsage').textContent =
             `${(data.memory_used / (1024**3)).toFixed(2)} GB / ${(data.memory_total / (1024**3)).toFixed(2)} GB (${data.memory_percent}%)`;
+
+        // === Buffer güncelleme ===
+        cpuHistory.push(data.cpu);
+        if (cpuHistory.length > 100) cpuHistory.shift();
+
+        ramHistory.push(data.memory_percent);
+        if (ramHistory.length > 100) ramHistory.shift();
+
+        // === Grafik güncelle ===
+        cpuChart.data.datasets[0].data = cpuHistory;
+        cpuChart.update();
+
+        ramChart.data.datasets[0].data = ramHistory;
+        ramChart.update();
 
     } catch (e) {
         console.error("Metrics fetch failed:", e);
     }
 }
+
+
+// === Grafikler için veri bufferları ===
+let cpuHistory = [];
+let ramHistory = [];
+
+// === Grafik setup ===
+const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+const ramCtx = document.getElementById('ramChart').getContext('2d');
+
+const cpuChart = new Chart(cpuCtx, {
+    type: 'line',
+    data: {
+        labels: Array(100).fill(""),
+        datasets: [{
+            label: 'CPU (%)',
+            data: cpuHistory,
+            borderWidth: 2,
+            tension: 0.2
+        }]
+    },
+    options: {
+        animation: false,
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+});
+
+const ramChart = new Chart(ramCtx, {
+    type: 'line',
+    data: {
+        labels: Array(100).fill(""),
+        datasets: [{
+            label: 'RAM (%)',
+            data: ramHistory,
+            borderWidth: 2,
+            tension: 0.2
+        }]
+    },
+    options: {
+        animation: false,
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+});
+
 
 // Her 3 saniyede bir güncelle
 setInterval(updateMetrics, 3000);

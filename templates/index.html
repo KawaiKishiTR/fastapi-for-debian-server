@@ -33,6 +33,18 @@
             <p>RAM: <span id="ramUsage">yükleniyor...</span></p>
         </section>
 
+        <section class="charts">
+            <h2>Canlı Sistem Grafikleri</h2>
+
+            <div class="chart-container">
+                <canvas id="cpuChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="ramChart"></canvas>
+            </div>
+        </section>
+
         <section class="logs">
             <h2>Sunucu Logları</h2>
             <pre id="logArea">Loglar burada görüntülenecek...</pre>
@@ -43,6 +55,7 @@
         <p>&copy; 2025 Minecraft Server Yönetimi</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/script.js"></script>
 </body>
 </html>
