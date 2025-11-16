@@ -20,28 +20,36 @@
     </header>
 
     <main>
-        <section class="controls">
-            <h2>Sunucu Kontrolleri</h2>
-            <button id="startBtn">Sunucuyu Başlat</button>
-            <button id="stopBtn">Sunucuyu Durdur</button>
-            <button id="restartBtn">Sunucuyu Yeniden Başlat</button>
-        </section>
+        <div class="top-sections">
+            <section class="controls">
+                <h2>Sunucu Kontrolleri</h2>
+                <button id="startBtn">Sunucuyu Başlat</button>
+                <button id="stopBtn">Sunucuyu Durdur</button>
+                <button id="restartBtn">Sunucuyu Yeniden Başlat</button>
+            </section>
 
-        <section class="charts">
-            <h2>Canlı Sistem Grafikleri</h2>
+            <section class="charts">
+                <h2>Canlı Sistem Grafikleri</h2>
 
-            <div class="chart-container">
-                <canvas id="cpuChart"></canvas>
-            </div>
+                <div class="chart-container">
+                    <canvas id="cpuChart"></canvas>
+                </div>
 
-            <div class="chart-container">
-                <canvas id="ramChart"></canvas>
-            </div>
-        </section>
+                <div class="chart-container">
+                    <canvas id="ramChart"></canvas>
+                </div>
+            </section>
+        </div>
 
         <section class="logs">
             <h2>Sunucu Logları</h2>
             <pre id="logArea">Loglar burada görüntülenecek...</pre>
+        </section>
+
+        <section class="command">
+            <h2>Konsol Komutu Gönder</h2>
+            <input type="text" id="cmdInput" placeholder="Komut yazın...">
+            <button id="sendCmdBtn">Gönder</button>
         </section>
     </main>
 

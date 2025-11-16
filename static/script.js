@@ -89,7 +89,9 @@ const cpuChart = new Chart(cpuCtx, {
             label: 'CPU (%)',
             data: cpuHistory,
             borderWidth: 2,
-            tension: 0.2
+            tension: 0.2,
+            pointRadius: 0,
+            pointHoverRadius: 0,
         }]
     },
     options: {
@@ -117,7 +119,9 @@ const ramChart = new Chart(ramCtx, {
             label: 'RAM (%)',
             data: ramHistory,
             borderWidth: 2,
-            tension: 0.2
+            tension: 0.2,
+            pointRadius: 0,
+            pointHoverRadius: 0,
         }]
     },
     options: {
@@ -135,6 +139,29 @@ const ramChart = new Chart(ramCtx, {
         }
     }
 });
+
+document.getElementById('sendCmdBtn').addEventListener('click', async () => {
+    const cmd = document.getElementById('cmdInput').value;
+    if (!cmd) return;
+
+    const res = await fetch('/send-command', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ command: cmd })
+    });
+
+    const data = await res.json();
+
+    if (data.status === "ok") {
+        logArea.textContent += `\n> ${cmd}\n${data.response}\n`;
+    } else {
+        logArea.textContent += `\n[HATA] Komut gönderilemedi: ${data.error}\n`;
+    }
+
+    logArea.scrollTop = logArea.scrollHeight;
+    document.getElementById('cmdInput').value = "";
+});
+
 
 
 

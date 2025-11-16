@@ -1,10 +1,20 @@
 from fastapi import FastAPI, WebSocket, Request
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
+from mcrcon import MCRcon
 import subprocess
 import asyncio
 import psutil
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
+
+class Command(BaseModel):
+    command: str
+
 
 app = FastAPI()
 
@@ -107,3 +117,14 @@ async def check_server_status():
     )
     stdout, _ = await proc.communicate()
     return stdout.decode().strip() == "active"
+
+@app.post("/send-command")
+async def send_command(cmd: Command):
+    try:
+        with MCRcon("127.0.0.1", os.getenv("RCON_PASSWORD"), port=25575) as mcr:
+            response = mcr.command(cmd.command)
+
+        return {"status": "ok", "response": response}
+
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
