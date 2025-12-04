@@ -27,15 +27,15 @@ templates = Jinja2Templates(directory="templates")
 
 def start_server_():
     subprocess.Popen(
-        ["sudo", "systemctl", "start", "minecraft"],
+        ["sudo", "systemctl", "start", "minecraft@survival"],
     )
 def stop_server_():
     subprocess.Popen(
-        ["sudo", "systemctl", "stop", "minecraft"]
+        ["sudo", "systemctl", "stop", "minecraft@survival"]
     )
 def restart_server_():
     subprocess.Popen(
-        ["sudo", "systemctl", "restart", "minecraft"]
+        ["sudo", "systemctl", "restart", "minecraft@survival"]
     )
 
 
@@ -84,7 +84,7 @@ def restart_server():
 async def websocket_logs(websocket: WebSocket):
     await websocket.accept()
     process = await asyncio.create_subprocess_exec(
-        "journalctl", "-u", "minecraft.service", "-f", "-n", "20",
+        "journalctl", "-u", "minecraft@survival.service", "-f", "-n", "20",
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
@@ -111,7 +111,7 @@ async def status():
 # === HELPER: systemctl status kontrolü ===
 async def check_server_status():
     proc = await asyncio.create_subprocess_exec(
-        "systemctl", "is-active", "minecraft.service",
+        "systemctl", "is-active", "minecraft@survival.service",
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE
     )
