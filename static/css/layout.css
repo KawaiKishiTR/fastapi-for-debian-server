@@ -1,0 +1,27 @@
+/* General page layout */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.top-sections {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+header {
+    background: var(--card-bg);
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background: var(--card-bg);
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
