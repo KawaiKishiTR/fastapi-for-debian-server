@@ -1,58 +1,80 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Minecraft Server Yönetimi</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-    <header>
-        <h1>Minecraft Server Yönetimi</h1>
-        <p id="serverStatus">
-            Durum: 
+    <header role="banner" class="bg-card p-20 text-center">
+        <h1 class="text-accent" style="margin:0">Minecraft Server Yönetimi</h1>
+        <p id="serverStatus" aria-live="polite" style="margin-top:6px">
+            Durum:
             {% if server_running %}
-                <span class="running">ÇALIŞIYOR</span>
+                <span class="status-running">ÇALIŞIYOR</span>
             {% else %}
-                <span class="stopped">DURDURULMUŞ</span>
+                <span class="status-stopped">DURDURULMUŞ</span>
             {% endif %}
         </p>
     </header>
 
-    <main>
+    <main role="main" class="p-20">
         <div class="top-sections">
-            <section class="controls">
-                <h2>Sunucu Kontrolleri</h2>
-                <button id="startBtn">Sunucuyu Başlat</button>
-                <button id="stopBtn">Sunucuyu Durdur</button>
-                <button id="restartBtn">Sunucuyu Yeniden Başlat</button>
-            </section>
 
-            <section class="charts">
-                <h2>Canlı Sistem Grafikleri</h2>
+            <!-- Kontroller -->
+            <section class="card controls" aria-labelledby="controls-title">
+                <h2 id="controls-title" class="section-title">Sunucu Kontrolleri</h2>
 
-                <div class="chart-container">
-                    <canvas id="cpuChart"></canvas>
-                </div>
-
-                <div class="chart-container">
-                    <canvas id="ramChart"></canvas>
+                <div class="flex flex-row gap-10" role="group" aria-label="Sunucu komutları">
+                    <button id="startBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Başlat</button>
+                    <button id="stopBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Durdur</button>
+                    <button id="restartBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Yeniden Başlat</button>
                 </div>
             </section>
+
+            <!-- Grafikleri gösteren bölüm -->
+            <section class="card charts" aria-labelledby="charts-title">
+                <h2 id="charts-title" class="section-title">Canlı Sistem Grafikleri</h2>
+
+                <div class="chart-container card" aria-hidden="false">
+                    <div class="chart-area" role="img" aria-label="CPU kullanım grafiği">
+                        <canvas id="cpuChart" width="400" height="250"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container card" aria-hidden="false">
+                    <div class="chart-area" role="img" aria-label="RAM kullanım grafiği">
+                        <canvas id="ramChart" width="400" height="250"></canvas>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
-        <section class="logs">
-            <h2>Sunucu Logları</h2>
-            <pre id="logArea">Loglar burada görüntülenecek...</pre>
-            <div class="command">
-                <input type="text" id="cmdInput" placeholder="Terminal komudu girin...">
-                <button id="sendCmdBtn">Gönder</button>
-            </div>
+        <!-- Loglar ve komut girişi -->
+        <section class="card" aria-labelledby="logs-title">
+            <h2 id="logs-title" class="section-title">Sunucu Logları</h2>
+
+            <pre id="logArea" class="log-box" role="log" aria-live="polite">Loglar burada görüntülenecek...</pre>
+
+            <form id="commandForm" class="command-box" onsubmit="return false;" aria-label="Komut gönderme formu">
+                <input
+                    type="text"
+                    id="cmdInput"
+                    class="command-input"
+                    name="command"
+                    placeholder="Terminal komutu girin..."
+                    aria-label="Komut girişi"
+                    autocomplete="off"
+                />
+                <button id="sendCmdBtn" class="btn command-btn" type="button">Gönder</button>
+            </form>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Minecraft Server Yönetimi</p>
+    <footer role="contentinfo" class="bg-card p-20 text-center">
+        <p style="margin:0">&copy; 2025 Minecraft Server Yönetimi</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -1,0 +1,85 @@
+.btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius);
+    font-size: 1em;
+    background: var(--accent);
+    color: var(--bg);
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #d68910;
+}
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    flex: 1 1 400px;
+}
+.status-running {
+    color: var(--success);
+    font-weight: bold;
+}
+
+.status-stopped {
+    color: var(--danger);
+    font-weight: bold;
+}
+.chart-container {
+    width: 100%;
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+
+    /* Sorunu çözen kısımlar */
+    height: 300px;              /* Sabit değil, tanımlı bir alan */
+    max-height: 300px;
+    overflow: hidden;           /* Taşmayı kesin engeller */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-container canvas {
+    width: 100% !important;     /* Chart.js genişliği */
+    height: 100% !important;    /* Taşmayı engellemek için kritik */
+    display: block;             /* Inline-block taşmasını engeller */
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+.log-box {
+    background: #111;
+    padding: 10px;
+    border-radius: var(--radius);
+    height: 300px;
+    overflow-y: auto;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.command-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.command-input {
+    flex: 1;
+    background: #111;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: var(--radius);
+    color: var(--text);
+}
+
+.command-btn {
+    padding: 10px 15px;
+}
