@@ -1,23 +1,39 @@
-@import "css/theme.css";
-@import "css/utilities.css";
-@import "css/layout.css";
-@import "css/components.css";
+.card {
+  background-color: #222;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
-/* Base */
+.card {
+  padding: 20px;
+}
+
+.btn {
+  background-color: #f39c12;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btn:hover {
+  background-color: rgb(199.8795180723, 126.5060240964, 10.1204819277);
+}
+
+.chart-container {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+  outline: 5px solid lime;
 }
 
-h2 {
-    color: var(--accent);
-}
-
-/* Header text override */
-header h1 {
-    color: var(--accent);
-    margin: 0;
-}
+/*# sourceMappingURL=style.css.map */
