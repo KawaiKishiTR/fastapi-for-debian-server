@@ -6,7 +6,7 @@ __pycache__/
 .sass-cache/
 # C extensions
 *.so
-
+.bash_history
 # Distribution / packaging
 .Python
 build/
