@@ -50,7 +50,7 @@ class ServerService:
             return False
         
         proc = await asyncio.create_subprocess_exec(
-            "sudo", "systemctl", "is-active", service_name,
+            "systemctl", "is-active", service_name,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE
         )

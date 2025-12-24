@@ -1,7 +1,6 @@
 
 async function server_start() {
     await fetch(`${API_BASE}/api/server-start`, {method:"POST"})
-    console.log("starting")
     _updateStatus()
 }
 

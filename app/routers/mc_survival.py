@@ -20,15 +20,15 @@ async def root_page(request: Request):
 
 @router.post("/api/server-start")
 async def start_server():
-    server_service.start()
+    await server_service.start()
 
 @router.post("/api/server-stop")
 async def stop_server():
-    server_service.stop()
+    await server_service.stop()
 
 @router.post("/api/server-restart")
 async def restart_server():
-    server_service.restart()
+    await server_service.restart()
 
 @router.get("/api/server-status")
 async def server_status():
