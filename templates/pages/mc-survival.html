@@ -12,9 +12,9 @@
             <h2 id="controls-title" class="section-title">Sunucu Kontrolleri</h2>
 
             <div class="flex flex-row gap-10" role="group" aria-label="Sunucu komutları">
-                <button id="startBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Başlat</button>
-                <button id="stopBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Durdur</button>
-                <button id="restartBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Yeniden Başlat</button>
+                <button id="startBtn" class="btn" type="button" aria-pressed="false", onclick="server_start()">Sunucuyu Başlat</button>
+                <button id="stopBtn" class="btn" type="button" aria-pressed="false", onclick="server_stop()">Sunucuyu Durdur</button>
+                <button id="restartBtn" class="btn" type="button" aria-pressed="false", onclick="server_restart()">Sunucuyu Yeniden Başlat</button>
             </div>
         </section>
 

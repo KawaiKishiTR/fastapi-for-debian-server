@@ -1,6 +1,7 @@
 
 async function server_start() {
     await fetch(`${API_BASE}/api/server-start`, {method:"POST"})
+    console.log("starting")
     _updateStatus()
 }
 
@@ -14,9 +15,6 @@ async function server_restart() {
     _updateStatus()
 }
 
-document.getElementById("startBtn")?.addEventListener("click", server_start);
-document.getElementById("stopBtn")?.addEventListener("click", server_stop);
-document.getElementById("restartBtn")?.addEventListener("click", server_restart);
 
 
 async function _updateStatus() {
