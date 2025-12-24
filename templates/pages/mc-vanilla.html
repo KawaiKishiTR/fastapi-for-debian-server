@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- JS Bağlantıları -->
+
+<script src="/static/js/mc-vanilla.js"></script>
+
+<main role="main" class="p-20">
+    <div class="top-sections">
+
+        <!-- Kontroller -->
+        <section class="card controls" aria-labelledby="controls-title">
+            <h2 id="controls-title" class="section-title">Sunucu Kontrolleri</h2>
+
+            <div class="flex flex-row gap-10" role="group" aria-label="Sunucu komutları">
+                <button id="startBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Başlat</button>
+                <button id="stopBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Durdur</button>
+                <button id="restartBtn" class="btn" type="button" aria-pressed="false">Sunucuyu Yeniden Başlat</button>
+            </div>
+        </section>
+
+        <!-- Grafikleri gösteren bölüm -->
+        <section class="card charts" aria-labelledby="charts-title">
+            <h2 id="charts-title" class="section-title">Canlı Sistem Grafikleri</h2>
+
+            <div class="chart-container card" aria-hidden="false">
+                <div class="chart-area" role="img" aria-label="Sistem kullanım grafiği">
+                    <canvas id="systemChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loglar ve komut girişi -->
+    <section class="card" aria-labelledby="logs-title">
+        <h2 id="logs-title" class="section-title">Sunucu Logları</h2>
+
+        <pre id="logArea" class="log-box" role="log" aria-live="polite">Loglar burada görüntülenecek...</pre>
+
+        <form id="commandForm" class="command-box" onsubmit="return false;" aria-label="Komut gönderme formu">
+            <input
+                type="text"
+                id="cmdInput"
+                class="command-input"
+                name="command"
+                placeholder="Terminal komutu girin..."
+                aria-label="Komut girişi"
+                autocomplete="off"
+            />
+            <button id="sendCmdBtn" class="btn command-btn" type="button">Gönder</button>
+        </form>
+    </section>
+</main>
+
+
+{% endblock %}
