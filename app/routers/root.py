@@ -7,4 +7,4 @@ templates = Jinja2Templates(directory="static")
 
 @router.get("/", response_class=HTMLResponse)
 async def root_page(request: Request):
-    return RedirectResponse(url="/servers/mc-vanilla")
+    return RedirectResponse(url="/servers/mc-survival")

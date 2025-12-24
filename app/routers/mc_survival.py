@@ -5,16 +5,16 @@ from ..core.linux_services import ServerService
 
 
 router = APIRouter()
-server_service = ServerService("minecraft@vanilla")
+server_service = ServerService("minecraft@survival")
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 async def root_page(request: Request):
     return templates.TemplateResponse(
-        "pages/mc-vanilla.html",
+        "pages/mc-survival.html",
         {
             "request": request,
-            "api_base":"/servers/mc-vanilla"
+            "api_base":"/servers/mc-survival"
         }
     )
 

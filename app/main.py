@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from app.routers import root, servers, mc_vanilla, machine
+from app.routers import mc_survival, root, servers, machine
 
 app = FastAPI()
 
@@ -13,4 +13,4 @@ app.mount("/templates", StaticFiles(directory="templates"), name="templates")
 app.include_router(root.router)
 app.include_router(machine.router, prefix="/machine")
 app.include_router(servers.router, prefix="/servers")
-app.include_router(mc_vanilla.router, prefix="/servers/mc-vanilla")
+app.include_router(mc_survival.router, prefix="/servers/mc-survival")
