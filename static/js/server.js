@@ -1,16 +1,19 @@
 
 async function server_start() {
     await fetch(`${API_BASE}/api/server-start`, {method:"POST"})
+    console.log(`POST Atıldı: ${API_BASE}/api/server-start`)
     _updateStatus()
 }
 
 async function server_stop() {
     await fetch(`${API_BASE}/api/server-stop`, {method:"POST"})
+    console.log(`POST Atıldı: ${API_BASE}/api/server-stop`)
     _updateStatus()
 }
 
 async function server_restart() {
     await fetch(`${API_BASE}/api/server-restart`, {method:"POST"})
+    console.log(`POST Atıldı: ${API_BASE}/api/server-restart`)
     _updateStatus()
 }
 

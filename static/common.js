@@ -64,7 +64,7 @@ async function updateMetrics() {
     cpuHistory.push(data.cpu);
     if (cpuHistory.length > 100) cpuHistory.shift();
 
-    ramHistory.push(data.memory_percent);
+    ramHistory.push(data.ram);
     if (ramHistory.length > 100) ramHistory.shift();
 
     // === Grafik veri güncelleme ===
@@ -77,5 +77,23 @@ async function updateMetrics() {
     }
 }
 
+async function setSystemMetricsHistory() {
+    const historyRes = await fetch(`/machine/api/system-history`);
+    const history = await historyRes.json();
+    cpuHistory.splice(0, 100, ...history.cpu);
+    ramHistory.splice(0, 100, ...history.ram);
+    systemChart.data.datasets[0].data = cpuHistory;
+    systemChart.data.datasets[1].data = ramHistory;
+    systemChart.update();
+}
 
-setInterval(updateMetrics, 3000)
+async function init() {
+    await setSystemMetricsHistory();
+    setInterval(updateMetrics, 3000);
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("typeof setMetricsHistory:", typeof setMetricsHistory);
+    init();
+});
