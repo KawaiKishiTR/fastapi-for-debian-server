@@ -1,0 +1,14 @@
+@use "variables";
+
+body {
+  font-family: variables.$font-main;
+  margin: 0;
+  padding: 0;
+  background-color: variables.$bg-main;
+  color: variables.$text-main;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

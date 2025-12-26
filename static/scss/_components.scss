@@ -1,0 +1,71 @@
+@use "sass:color";
+@use "variables";
+
+.status-running {
+  color: variables.$status-running;
+  font-weight: bold;
+}
+
+.status-stopped {
+  color: variables.$status-stopped;
+  font-weight: bold;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1em;
+  border: none;
+  border-radius: variables.$radius-sm;
+  cursor: pointer;
+  background-color: variables.$text-accent;
+  color: variables.$bg-main;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: color.adjust(variables.$text-accent, $lightness: -10%)
+    //darken(variables.$text-accent, 10%);
+  }
+}
+
+.logs {
+  pre {
+    background-color: variables.$bg-input;
+    padding: 10px;
+    border-radius: variables.$radius-sm;
+    height: 300px;
+    overflow-y: scroll;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+
+  section {
+    width: 100%;
+    min-height: 250px;
+  }
+}
+
+.command {
+  background-color: variables.$bg-section;
+  border-radius: variables.$radius-md;
+  padding: 20px;
+  margin: 10px 0;
+  width: 98%;
+}
+
+#cmdInput {
+  width: 92%;
+  padding: 10px;
+  background-color: variables.$bg-input;
+  border: 1px solid variables.$bg-header;
+  color: variables.$text-main;
+  border-radius: variables.$radius-sm;
+}
+
+#sendCmdBtn {
+  padding: 10px 15px;
+  margin-left: 10px;
+}

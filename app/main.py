@@ -19,4 +19,3 @@ app.include_router(mc_survival.router, prefix="/servers/mc-survival")
 app.include_router(mc_redstone.router, prefix="/servers/mc-redstone")
 app.include_router(fc_vanilla.router, prefix="/servers/fc-vanilla")
 app.include_router(fc_krastorio2.router, prefix="/servers/fc-krastorio2")
-

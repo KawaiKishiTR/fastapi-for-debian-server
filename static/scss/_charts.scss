@@ -1,0 +1,24 @@
+@use "variables";
+
+.system-stats {
+  background-color: variables.$bg-section;
+  border-radius: variables.$radius-md;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: variables.$shadow-soft;
+}
+
+.charts {
+  background-color: variables.$bg-section;
+  max-width: 550px;
+  padding: 20px;
+  border-radius: variables.$radius-md;
+  margin: 10px;
+  box-shadow: variables.$shadow-soft;
+}
+
+.chart-container {
+  position: relative;
+  height: 250px;
+  margin-bottom: 25px;
+}

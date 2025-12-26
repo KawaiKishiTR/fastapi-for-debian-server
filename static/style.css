@@ -1,5 +1,3 @@
-@charset "UTF-8";
-/* Genel ayarlar */
 body {
   font-family: "Arial", sans-serif;
   margin: 0;
@@ -8,12 +6,16 @@ body {
   color: #f0f0f0;
 }
 
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 header {
   background-color: #333;
   padding: 20px;
   text-align: center;
 }
-
 header h1 {
   margin: 0;
   font-size: 2em;
@@ -22,21 +24,11 @@ header h1 {
 
 main {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  flex-direction: column; /* Hepsi alta doğru */
   justify-content: space-around;
   padding: 20px;
   gap: 20px;
-}
-
-.status-running {
-  color: #2ecc71; /* yeşil */
-  font-weight: bold;
-}
-
-.status-stopped {
-  color: #e74c3c; /* kırmızı */
-  font-weight: bold;
 }
 
 .top-sections {
@@ -55,8 +47,25 @@ section {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #333;
+  margin-top: 20px;
+}
+
 h2 {
   color: #f39c12;
+}
+
+.status-running {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.status-stopped {
+  color: #e74c3c;
+  font-weight: bold;
 }
 
 button {
@@ -70,9 +79,8 @@ button {
   color: #1a1a1a;
   transition: background-color 0.2s;
 }
-
 button:hover {
-  background-color: #d68910;
+  background-color: rgb(199.8795180723, 126.5060240964, 10.1204819277);
 }
 
 .logs pre {
@@ -82,22 +90,36 @@ button:hover {
   height: 300px;
   overflow-y: scroll;
   font-family: monospace;
-  white-space: pre-wrap; /* pre formatını koru ama uzun satırları sar */
-  word-break: break-word; /* çok uzun kelimeleri bile kır */
+  white-space: pre-wrap;
+  word-break: break-word;
   overflow-wrap: break-word;
   box-sizing: border-box;
 }
-
 .logs section {
   width: 100%;
   min-height: 250px;
 }
 
-footer {
-  text-align: center;
-  padding: 15px;
-  background-color: #333;
-  margin-top: 20px;
+.command {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  width: 98%;
+}
+
+#cmdInput {
+  width: 92%;
+  padding: 10px;
+  background-color: #111;
+  border: 1px solid #333;
+  color: #f0f0f0;
+  border-radius: 5px;
+}
+
+#sendCmdBtn {
+  padding: 10px 15px;
+  margin-left: 10px;
 }
 
 .system-stats {
@@ -121,33 +143,6 @@ footer {
   position: relative;
   height: 250px;
   margin-bottom: 25px;
-}
-
-canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.command {
-  background-color: #222;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px 0;
-  width: 98%;
-}
-
-#cmdInput {
-  width: 92%;
-  padding: 10px;
-  background-color: #111;
-  border: 1px solid #333;
-  color: #f0f0f0;
-  border-radius: 5px;
-}
-
-#sendCmdBtn {
-  padding: 10px 15px;
-  margin-left: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
