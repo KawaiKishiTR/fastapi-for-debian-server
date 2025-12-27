@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.patch
 .sass-cache/
+files/
 # C extensions
 *.so
 .bash_history
