@@ -6,7 +6,7 @@ async function startLogStream() {
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
 
-    while (True) {
+    while (true) {
         const { value, done } = await reader.read();
         if (done) break;
 
