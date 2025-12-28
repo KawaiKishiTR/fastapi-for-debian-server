@@ -15,6 +15,10 @@
                 <button id="startBtn" class="btn" type="button" aria-pressed="false", onclick="server_start()">Sunucuyu Başlat</button>
                 <button id="stopBtn" class="btn" type="button" aria-pressed="false", onclick="server_stop()">Sunucuyu Durdur</button>
                 <button id="restartBtn" class="btn" type="button" aria-pressed="false", onclick="server_restart()">Sunucuyu Yeniden Başlat</button>
+                {% if service_name == "minecraft@sweet" %}
+                <button id="DownloadModsZipBtn" class="btn" type="button" aria-pressed="false", onclick="window.location.href='{{ api_base }}/api/download-mods-zip'">Mod Paketi İndir</button>
+                <button id="DownloadResourcePacksZipBtn" class="btn" type="button" aria-pressed="false", onclick="window.location.href='{{ api_base }}/api/download-resourcepacks-zip'">Kaynak Paketi İndir</button>
+                {% endif %}
             </div>
         </section>
 

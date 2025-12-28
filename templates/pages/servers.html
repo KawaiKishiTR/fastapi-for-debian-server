@@ -1,11 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+
+<ul class="server-list">
+
+  <li class="server-item" data-href="/servers/mc-vanilla">
+    <span class="status-dot running"></span>
+    <span class="server-name">Minecraft Vanilla</span>
+
+    <div class="server-actions">
+      <button class="btn-start"  title="Start">▶</button>
+      <button class="btn-restart" title="Restart">⟳</button>
+      <button class="btn-stop"   title="Stop">■</button>
+    </div>
+  </li>
+
+  <li class="server-item" data-href="/servers/mc-redstone">
+    <span class="status-dot stopped"></span>
+    <span class="server-name">Minecraft Redstone</span>
+
+    <div class="server-actions">
+      <button class="btn-start"  title="Start">▶</button>
+      <button class="btn-restart" title="Restart">⟳</button>
+      <button class="btn-stop"   title="Stop">■</button>
+    </div>
+  </li>
+
+  <li class="server-item" data-href="/servers/fc-vanilla">
+    <span class="status-dot running"></span>
+    <span class="server-name">Factorio Vanilla</span>
+
+    <div class="server-actions">
+      <button class="btn-start"  title="Start">▶</button>
+      <button class="btn-restart" title="Restart">⟳</button>
+      <button class="btn-stop"   title="Stop">■</button>
+    </div>
+  </li>
+
+  <li class="server-item" data-href="/servers/fc-krastorio2">
+    <span class="status-dot running"></span>
+    <span class="server-name">Factorio Krastorio2</span>
+
+    <div class="server-actions">
+      <button class="btn-start"  title="Start">▶</button>
+      <button class="btn-restart" title="Restart">⟳</button>
+      <button class="btn-stop"   title="Stop">■</button>
+    </div>
+  </li>
+
+</ul>
+
+{% endblock %}

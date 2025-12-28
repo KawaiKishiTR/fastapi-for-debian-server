@@ -1,0 +1,32 @@
+[
+    {
+        "display_name":"Minecraft Survival Server",
+        "service_name":"minecraft@survival",
+        "endpoint":"mc-survival",
+        "server_type":"minecraft"
+    },
+    {
+        "display_name":"Minecraft Sweet Server",
+        "service_name":"minecraft@sweet",
+        "endpoint":"mc-sweet",
+        "server_type":"minecraft"
+    },
+    {
+        "display_name":"Minecraft Redstone Server",
+        "service_name":"minecraft@redstone",
+        "endpoint":"mc-redstone",
+        "server_type":"minecraft"
+    },
+    {
+        "display_name":"Factorio Vanilla Server",
+        "service_name":"factorio@vanilla",
+        "endpoint":"fc-vanilla",
+        "server_type":"factorio"
+    },
+    {
+        "display_name":"Factorio Krastorio2 Server",
+        "service_name":"factorio@krastorio2",
+        "endpoint":"fc-krastorio2",
+        "server_type":"factorio"
+    }
+]

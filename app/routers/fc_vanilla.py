@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from ..core.linux_services import ServerService
+from ..core.servers_core import *
 
 
 router = APIRouter()
-server_service = ServerService("factorio@vanilla")
 templates = Jinja2Templates(directory="templates")
+
+
+service_name = "factorio@vanilla"
+server_service = ServerService(service_name)
+
 
 @router.get("/", response_class=HTMLResponse)
 async def root_page(request: Request):
@@ -14,7 +15,8 @@ async def root_page(request: Request):
         "pages/server.html",
         {
             "request": request,
-            "api_base":"/servers/fc-vanilla"
+            "api_base":"/servers/fc-vanilla",
+            **load_ServerMetadata_from_service_name(service_name)
         }
     )
 
