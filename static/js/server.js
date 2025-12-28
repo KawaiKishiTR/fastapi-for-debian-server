@@ -41,7 +41,7 @@ async function updateStatus() {
     } finally {
         setTimeout(updateStatus, 3000)
     }
-
+    
 }
 
 async function sendCommand() {

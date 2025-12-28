@@ -1,11 +1,10 @@
 from ..core.servers_core import *
-from ..core.minecraft_rcon import RconRunner
+from ..core.minecraft_rcon import send_rcon_command, CommandLine
 from fastapi.responses import RedirectResponse
-from fastapi import HTTPException
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
-rcon_runner = RconRunner(25577, "gO46Es5SKTkgYkB4FysT")
+
 
 service_name = "minecraft@sweet"
 server_service = ServerService(service_name)
@@ -61,15 +60,6 @@ def download_resourcepacks_zip():
 
 # RCON POST ENDPOINT
 @router.post("/api/send-rcon-command")
-async def send_command(command: str):
-    cmd = command.strip()
-
-    if not cmd:
-        raise HTTPException(status_code=400, detail="Boş Komut")
-    
-    try:
-        output = rcon_runner.run_rcon_command(cmd)
-        return {"output":output}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+async def send_command(command: CommandLine):
+    send_rcon_command(command, 25577, "gO46Es5SKTkgYkB4FysT")
     
