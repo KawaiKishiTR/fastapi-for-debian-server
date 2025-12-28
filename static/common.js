@@ -94,6 +94,5 @@ async function init() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("typeof setMetricsHistory:", typeof setMetricsHistory);
     init();
 });

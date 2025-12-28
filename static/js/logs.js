@@ -10,7 +10,7 @@ async function startLogStream() {
         const { value, done } = await reader.read();
         if (done) break;
 
-        const chunk = decoder.decode(value, { stream: True });
+        const chunk = decoder.decode(value, { stream: true });
         appendLog(chunk);
     }
 }
