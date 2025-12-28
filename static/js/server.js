@@ -1,4 +1,9 @@
 
+const sendBtn = document.getElementById("sendCmdBtn");
+const input = document.getElementById("cmdInput");
+
+sendBtn.addEventListener("click", sendCommand);
+
 async function server_start() {
     await fetch(`${API_BASE}/api/server-start`, {method:"POST"})
     console.log(`POST Atıldı: ${API_BASE}/api/server-start`)
@@ -42,6 +47,25 @@ async function updateStatus() {
 
 }
 
+async function sendCommand() {
+    const command = input.value.trim();
+    if (!command) return;
 
+    const res = await fetch(`${API_BASE}/api/send-rcon-command`, {
+        method:"POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({command})
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        appendLog(`[HATA] ${data.detail}\n`);
+        return;
+    }
+
+    appendLog(`[RCON] ${data.output}\n`);
+    input.value = "";
+}
 
 updateStatus()
