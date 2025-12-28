@@ -28,25 +28,33 @@ button {
   }
 }
 
-.logs {
-  pre {
+.card.logs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .log-box {
     background-color: variables.$bg-input;
+    color: #00ff9c;
+
     padding: 10px;
     border-radius: variables.$radius-sm;
-    height: 300px;
-    overflow-y: scroll;
+
+    min-height: 300px;
+    max-height: 500px;
+
+    overflow-y: auto;
     font-family: monospace;
+
     white-space: pre-wrap;
     word-break: break-word;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     box-sizing: border-box;
-  }
 
-  section {
-    width: 100%;
-    min-height: 250px;
+    border: 1px solid #222;
   }
 }
+
 
 .command {
   background-color: variables.$bg-section;
