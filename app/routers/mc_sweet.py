@@ -61,5 +61,5 @@ def download_resourcepacks_zip():
 # RCON POST ENDPOINT
 @router.post("/api/send-rcon-command")
 async def send_command(command: CommandLine):
-    send_rcon_command(command, 25577, "gO46Es5SKTkgYkB4FysT")
+    return send_rcon_command(command, 25577, "gO46Es5SKTkgYkB4FysT")
     
