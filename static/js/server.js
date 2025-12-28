@@ -1,8 +1,5 @@
 
-const sendBtn = document.getElementById("sendCmdBtn");
 const input = document.getElementById("cmdInput");
-
-sendBtn.addEventListener("click", sendCommand);
 
 async function server_start() {
     await fetch(`${API_BASE}/api/server-start`, {method:"POST"})
