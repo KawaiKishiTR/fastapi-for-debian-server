@@ -41,6 +41,11 @@ async def linux_service_log_stream(service_name):
                 yield part + "\n"
     
     except asyncio.CancelledError:
-        process.terminate()
+        if process.returncode is None:
+            try:
+                process.terminate()
+                await process.wait()
+            except ProcessLookupError:
+                pass
         raise
 
