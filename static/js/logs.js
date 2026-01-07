@@ -2,7 +2,11 @@
 const logArea = document.getElementById("logArea");
 
 async function startLogStream() {
-    const response = await fetch(`${API_BASE}/api/service-logs`);
+    const response = await fetch(`/api/v1/servers/log-stream`, {
+        headers: {
+            'X-Server-Id':`${SERVER_ID}`
+        }
+    });
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
 

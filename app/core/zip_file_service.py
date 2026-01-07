@@ -53,11 +53,12 @@ def create_zip(zip_path:Path, src_path:Path, meta_key:str, metadata_path:Path = 
         build_zip(src_path, zip_path)
         return
     
-    hash_key = compute_files_hash(src_path)
-    metadata = load_metadata(metadata_path)
+    if zip_path.exists():
+        hash_key = compute_files_hash(src_path)
+        metadata = load_metadata(metadata_path)
 
-    if metadata[meta_key] == hash_key:
-        return
+        if metadata[meta_key] == hash_key:
+            return
     
     build_zip(src_path, zip_path.with_suffix(".temp"))
     shutil.move(zip_path.with_suffix(".temp"), zip_path)

@@ -1,10 +1,11 @@
 import asyncio
+from ..core.log_stream import linux_service_log_stream
 from ..core.servers_metadata import SERVER_METADATA, reload_server_metadata
 from ..core.linux_services import ServerService
 from ..core import zip_file_service as zipfile
 from fastapi import APIRouter, Header, HTTPException
 from pathlib import Path
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 
 router = APIRouter()
 
@@ -22,11 +23,13 @@ def _get_folder_from_id(id):
     
     return metadata["folder"]
 
+### STATUS BAR
 @router.get("/status")
 async def get_status(x_server_id:str = Header(None)):
     service_name = _get_service_name_from_id(x_server_id)
     return await ServerService(service_name).is_active()
 
+### BUTTONS
 @router.post("/start")
 async def start_server(x_server_id:str = Header(None)):
     service_name = _get_service_name_from_id(x_server_id)
@@ -42,6 +45,16 @@ async def restart_server(x_server_id:str = Header(None)):
     service_name = _get_service_name_from_id(x_server_id)
     await ServerService(service_name).restart()
 
+### LOG STREAM
+@router.get("/log_stream")
+async def log_stream(x_server_id:str = Header(None)):
+    service_name = _get_service_name_from_id(x_server_id)
+    return StreamingResponse(
+        linux_service_log_stream(service_name),
+        media_type="text/plain"
+    )
+
+### DOWNLOADABLE FILE ENDPOINTS
 @router.get("/download-mods-zip")
 async def download_mods_zip(x_server_id:str = Header(None)):
     mods_dir = Path(_get_folder_from_id(x_server_id)) / "mods" #TODO: data yapısı değişince değişicek
@@ -66,18 +79,7 @@ async def download_mods_zip(x_server_id:str = Header(None)):
 
     return FileResponse(str(zip_path))
 
-
-
-
-
-
-
-
-
-
-
-
-
+### RELOAD ALL METADATA
 @router.get("/reload-metadata")
 async def reload_metadata():
     reload_server_metadata()
