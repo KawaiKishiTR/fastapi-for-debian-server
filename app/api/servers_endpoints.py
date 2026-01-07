@@ -46,7 +46,7 @@ async def restart_server(x_server_id:str = Header(None)):
     await ServerService(service_name).restart()
 
 ### LOG STREAM
-@router.get("/log_stream")
+@router.get("/log-stream")
 async def log_stream(x_server_id:str = Header(None)):
     service_name = _get_service_name_from_id(x_server_id)
     return StreamingResponse(
