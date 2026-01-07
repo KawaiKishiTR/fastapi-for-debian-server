@@ -58,7 +58,7 @@ const systemChart = new Chart(systemCtx, {
 
 async function updateMetrics() {
     try {
-        const res = await fetch('/machine/api/system-usage');
+        const res = await fetch('/api/v1/machine/system-usage');
         const data = await res.json();
 
     cpuHistory.push(data.cpu);
@@ -78,7 +78,7 @@ async function updateMetrics() {
 }
 
 async function setSystemMetricsHistory() {
-    const historyRes = await fetch(`/machine/api/system-history`);
+    const historyRes = await fetch(`/api/v1/machine/system-history`);
     const history = await historyRes.json();
     cpuHistory.splice(0, 100, ...history.cpu);
     ramHistory.splice(0, 100, ...history.ram);

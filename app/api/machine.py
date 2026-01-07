@@ -1,28 +1,25 @@
+from fastapi import APIRouter
 from collections import deque
 import psutil, asyncio
-from ..core.servers_core import *
-
 router = APIRouter()
 
 HISTORY_LENGHT = 100
 cpu_history = deque(maxlen=HISTORY_LENGHT)
 ram_history = deque(maxlen=HISTORY_LENGHT)
 
-@router.get("/api/system-usage")
+@router.get("/system-usage")
 def systemUsage():
     return {
         "cpu":cpu_history[-1],
         "ram":ram_history[-1]
     }
 
-@router.get("/api/system-history")
+@router.get("/system-history")
 def system_history():
     return {
         "cpu":list(cpu_history),
         "ram":list(ram_history)
     }
-
-
 
 def _collect_system_usage():
     cpu = psutil.cpu_percent(interval=None)

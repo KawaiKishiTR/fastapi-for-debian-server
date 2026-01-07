@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from app.routers import mc_survival, mc_redstone, mc_sweet, fc_vanilla, fc_krastorio2, root, servers, machine
+from app.routers import mc_survival, mc_redstone, mc_sweet, fc_vanilla, fc_krastorio2, root, servers
+from app.api import main as api
 from app.lifespan import lifespan
 
 
@@ -14,7 +15,7 @@ app.mount("/files", StaticFiles(directory="files"), name="files")
 
 # Routers
 app.include_router(root.router)
-app.include_router(machine.router, prefix="/machine")
+app.include_router(api.router, prefix="/api/v1")
 app.include_router(servers.router, prefix="/servers")
 app.include_router(mc_sweet.router, prefix="/servers/mc-sweet")
 app.include_router(mc_survival.router, prefix="/servers/mc-survival")

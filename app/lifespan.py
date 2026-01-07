@@ -1,7 +1,7 @@
 import asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from app.routers.machine import stats_loop
+from app.api.machine import stats_loop
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

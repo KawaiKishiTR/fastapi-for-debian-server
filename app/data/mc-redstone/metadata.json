@@ -1,0 +1,7 @@
+{
+    "display_name":"Minecraft Redstone Server",
+    "service_name":"minecraft@redstone",
+    "server_id":"mc-redstone",
+    "server_type":"minecraft",
+    "folder":"/srv/minecraft/redstone"
+}

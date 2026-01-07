@@ -1,0 +1,7 @@
+{
+    "display_name":"Factorio Vanilla Server",
+    "service_name":"factorio@vanilla",
+    "server_id":"fc-vanilla",
+    "server_type":"factorio",
+    "folder":"/srv/factorio/vanilla"
+}

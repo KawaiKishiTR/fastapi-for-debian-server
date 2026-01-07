@@ -1,0 +1,7 @@
+{
+    "display_name":"Factorio Krastorio2 Server",
+    "service_name":"factorio@krastorio2",
+    "server_id":"fc-krastorio2",
+    "server_type":"factorio",
+    "folder":"/srv/factorio/krastorio2"
+}
