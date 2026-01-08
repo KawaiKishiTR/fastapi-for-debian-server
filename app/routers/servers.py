@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -12,3 +12,28 @@ async def root_page(request: Request):
         "pages/servers.html",
         {"request": request}
     )
+
+VALID_SERVERS = {
+    "mc-survival",
+    "mc-redstone",
+    "mc-sweet",
+    "fc-vanilla",
+    "fc-krastorio2"
+}
+
+@router.get("/{server_id}", response_class=HTMLResponse)
+async def server_page(request: Request, server_id:str):
+    if server_id not in VALID_SERVERS:
+        raise HTTPException(404, detail="Server Not Found")
+    
+    ### TODO: here comes page config calculation
+
+    return templates.TemplateResponse(
+        "pages/server.html",
+        {
+            "request":request,
+            "server_id":server_id
+            ### TODO:add here page config params
+        }
+    )
+
