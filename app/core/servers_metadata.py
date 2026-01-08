@@ -37,7 +37,7 @@ class ServerMetadata:
         return self.data.get(key, default)
 
     def __getitem__(self, key:ValidKeys):
-        return self.data.get[key]
+        return self.data[key]
 
     def __setitem__(self, key:str | ValidKeys, value):
         self.data[key] = value
