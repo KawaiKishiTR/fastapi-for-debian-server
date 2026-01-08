@@ -1,45 +1,49 @@
 from pathlib import Path
 import json
-from typing import TypedDict
+from typing import Literal
 
 core_dir = Path(__file__).parent
 app_dir = core_dir.parent
 data_dir = app_dir / "data"
-server_data_file = data_dir / "server_data.json"
 
-class ServerMetadata(TypedDict):
-    display_name:str
-    service_name:str
-    endpoint:str
-    server_type:str
-    folder:str
-type ServerMetadataDict = dict[str:ServerMetadata]
-type ServerMetadataList = list[ServerMetadata]
+class ServerMetadata:
+    type ValidServerIds = Literal["mc-survival", "mc-redstone", "mc-sweet", "fc-vanilla", "fc-krastorio2"]
+    type ValidKeys = Literal["display_name", "service_name", "server_id", "server_type", "folder"]
+    @classmethod
+    def init_Wserver_id(cls, server_id:ValidServerIds):
+        data_file = data_dir / server_id / "metadata.json"
+        return cls.init_Wmetadata_file(data_file)
 
-def load_ServerMetadata_list() -> ServerMetadataList:
-    with open(server_data_file, "r", encoding="utf-8") as f:
-        return json.load(f)
+    @classmethod
+    def init_Wmetadata_file(cls, file_path:Path, create_file:bool = False):
+        if not file_path.exists():
+            if not create_file:
+                raise FileNotFoundError(f"{str(file_path)} already exists")
+            file_path.touch()
+            file_path.write_text(json.dumps({}, indent=4))
+        
+        metadata = cls(json.loads(file_path.read_text()))
+        metadata.file_path = file_path
+        return metadata
 
-def load_ServerMetadata_dict() -> ServerMetadataDict:
-    data = load_ServerMetadata_list()
+    def __init__(self, data:dict):
+        self.data = data
+        self.file_path:Path = None
 
-    result:ServerMetadataDict = {}
-    for metadata in data:
-        result[metadata["endpoint"]] = metadata
+    def __str__(self):
+        return json.dumps(self.data, indent=4)
+    
+    def get(self, key:str | ValidKeys, default = None):
+        return self.data.get(key, default)
 
-    return result
+    def __getitem__(self, key:ValidKeys):
+        return self.data.get[key]
 
-def load_ServerMetadata_from_key(key:str, value:str) -> ServerMetadata:
-    for metadata in load_ServerMetadata_list():
-        if metadata.get(key) == value:
-            return metadata
+    def __setitem__(self, key:str | ValidKeys, value):
+        self.data[key] = value
+        
+        if self.file_path is None:
+            return
+        
+        self.file_path.write_text(json.dumps(self.data, indent=4))
 
-def load_ServerMetadata_from_service_id(service_id:str):
-    metadata_f = data_dir / service_id / "metadata.json"
-    return json.loads(metadata_f.read_text())
-
-
-SERVER_METADATA:ServerMetadataDict = load_ServerMetadata_dict()
-def reload_server_metadata():
-    global SERVER_METADATA
-    SERVER_METADATA = load_ServerMetadata_dict()

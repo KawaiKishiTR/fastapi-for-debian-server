@@ -1,4 +1,4 @@
-
+from ..core.servers_metadata import ServerMetadata
 import hashlib
 import json
 import zipfile
@@ -48,22 +48,20 @@ def update_metadata(meta_path:Path, data:dict):
     metadata.update(data)
     save_metadata(meta_path, metadata)
 
-def create_zip(zip_path:Path, src_path:Path, meta_key:str, metadata_path:Path = None):
-    if metadata_path is None:
+def create_zip(zip_path:Path, src_path:Path, meta_key:str = "", server_metadata:ServerMetadata = None):
+    if server_metadata is None:
         build_zip(src_path, zip_path)
         return
     
     if zip_path.exists():
         hash_key = compute_files_hash(src_path)
-        metadata = load_metadata(metadata_path)
-
-        if metadata[meta_key] == hash_key:
+        if server_metadata.get(meta_key) == hash_key:
             return
     
     build_zip(src_path, zip_path.with_suffix(".temp"))
     shutil.move(zip_path.with_suffix(".temp"), zip_path)
 
-    update_metadata(metadata_path, {meta_key:hash_key})
+    server_metadata[meta_key] = hash_key
 
 
 
