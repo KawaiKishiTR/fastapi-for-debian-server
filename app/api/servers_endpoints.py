@@ -16,7 +16,7 @@ async def get_status(x_server_id: str = Header(...)):
         meta = ServerMetadata.init_Wserver_id(x_server_id)
         service_name = meta["service_name"]
 
-        active = ServerService(service_name).is_active()
+        active = await ServerService(service_name).is_active()
 
         return {"active": active}
 
