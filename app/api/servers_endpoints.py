@@ -3,7 +3,7 @@ from ..core.log_stream import linux_service_log_stream
 from ..core.servers_metadata import ServerMetadata
 from ..core.linux_services import ServerService
 from ..core import zip_file_service as zipfile
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Header, HTTPException
 from pathlib import Path
 from fastapi.responses import FileResponse, StreamingResponse
 
@@ -11,9 +11,18 @@ router = APIRouter()
 
 ### STATUS BAR
 @router.get("/status")
-async def get_status(x_server_id:str = Header(None)):
-    service_name = ServerMetadata.init_Wserver_id(x_server_id)["service_name"]
-    return await {"active": ServerService(service_name).is_active()}
+async def get_status(x_server_id: str = Header(...)):
+    try:
+        meta = ServerMetadata.init_Wserver_id(x_server_id)
+        service_name = meta["service_name"]
+
+        active = ServerService(service_name).is_active()
+
+        return {"active": active}
+
+    except Exception as e:
+        print("STATUS ERROR:", e)
+        raise HTTPException(status_code=500, detail=str(e))
 
 ### BUTTONS
 @router.post("/start")

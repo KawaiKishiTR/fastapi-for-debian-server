@@ -36,18 +36,28 @@ async function server_restart() {
 async function _updateStatus() {
     const res = await fetch(`/api/v1/servers/status`, {
         headers: {
-            'X-Server-Id':`${SERVER_ID}`
+            'X-Server-Id': SERVER_ID
         }
     })
-    const data = await res.json()        
+
+    if (!res.ok) {
+        const text = await res.text()
+        throw new Error(`HTTP ${res.status}: ${text}`)
+    }
+
+    const data = await res.json()
+
+    const el = document.getElementById("server-status-title")
+
     if (data.active) {
-        document.getElementById("server-status-title").innerText = "ÇALIŞIYOR"
-        document.getElementById("server-status-title").className = "status-running"
+        el.innerText = "ÇALIŞIYOR"
+        el.className = "status-running"
     } else {
-        document.getElementById("server-status-title").innerText = "DURDURULMUŞ"
-        document.getElementById("server-status-title").className = "status-stopped"
+        el.innerText = "DURDURULMUŞ"
+        el.className = "status-stopped"
     }
 }
+
 
 async function updateStatus() {
     try {
