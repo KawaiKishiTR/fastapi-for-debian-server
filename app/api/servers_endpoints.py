@@ -13,7 +13,7 @@ router = APIRouter()
 @router.get("/status")
 async def get_status(x_server_id:str = Header(None)):
     service_name = ServerMetadata.init_Wserver_id(x_server_id)["service_name"]
-    return await ServerService(service_name).is_active()
+    return await {"active": ServerService(service_name).is_active()}
 
 ### BUTTONS
 @router.post("/start")
