@@ -53,7 +53,7 @@ async def log_stream(x_server_id:str = Header(None)):
 @router.get("/download-mods-zip")
 async def download_mods_zip(x_server_id:str = Header(None)):
     server_metadata = ServerMetadata.init_Wserver_id(x_server_id)
-    mods_dir = Path(server_metadata["folder"]) / "mods"
+    mods_dir = Path(server_metadata["folder"]) / "client_mods"
     zip_path = zipfile.files_dir / x_server_id / "mods.zip"
 
     zipfile.create_zip(zip_path, mods_dir, "mods_hash_key", server_metadata)
