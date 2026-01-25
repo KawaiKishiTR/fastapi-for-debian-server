@@ -86,6 +86,7 @@ async def is_there_any_running_server(this_server_id:str):
         linux_service = ServerService(server_metadata.get(ValidKeys.SERVICE_NAME))
 
         print(server_id, linux_service.service_name)
+        print(server_metadata)
 
         if await linux_service.is_active():
             return server_metadata.get(ValidKeys.DISPLAY_NAME)
