@@ -10,4 +10,4 @@ class ServerID(Enum):
     FC_VANILLA = "fc-vanilla"
     FC_KRASTORIO2 = "fc-krastorio2"
 
-VALID_SERVERS = tuple(ServerID)
+VALID_SERVERS = tuple(s.value for s in ServerID)
