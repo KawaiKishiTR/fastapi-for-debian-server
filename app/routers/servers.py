@@ -28,7 +28,7 @@ async def server_page(request: Request, server_id:str):
         {
             "request":request,
             "server_id":server_id,
-            "metadata": await ServerMetadata(server_id).page_init()
+            "metadata": await ServerMetadata.init_Wserver_id(server_id).page_init()
         }
     )
 
