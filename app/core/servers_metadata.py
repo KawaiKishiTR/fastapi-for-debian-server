@@ -49,6 +49,7 @@ class ServerMetadata:
         return json.dumps(self.data, indent=4)
     
     def get(self, key:str | ValidKeys, default = None):
+        print(self, self.data, self.file_path)
         return self.data.get(key, default)
 
     def __getitem__(self, key:ValidKeys):
