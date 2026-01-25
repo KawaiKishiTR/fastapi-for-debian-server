@@ -32,22 +32,14 @@ async function server_restart() {
 }
 
 // Downloadable Files
-async function download_mods() {
-    await fetch(`/api/v1/servers/download-mods-zip`, {
-        headers: {
-            'X-Server-Id':`${SERVER_ID}`
-        }
-    })
+function download_mods() {
+    window.location.href = `/api/v1/servers/download-mods-zip?x_server_id=${SERVER_ID}`;
 }
 
 async function download_resourcepacks() {
-    await fetch(`/api/v1/servers/download-resourcepacks-zip`, {
-        headers: {
-            'X-Server-Id':`${SERVER_ID}`
-        }
-    })
-}
+    window.location.href = `/api/v1/servers/download-resourcepacks-zip?x_server_id=${SERVER_ID}`;
 
+}
 
 async function _updateStatus() {
     const res = await fetch(`/api/v1/servers/status`, {

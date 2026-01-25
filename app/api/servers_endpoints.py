@@ -51,21 +51,29 @@ async def log_stream(x_server_id:str = Header(None)):
 
 ### DOWNLOADABLE FILE ENDPOINTS
 @router.get("/download-mods-zip")
-async def download_mods_zip(x_server_id:str = Header(None)):
+async def download_mods_zip(x_server_id:str):
     server_metadata = ServerMetadata.init_Wserver_id(x_server_id)
     mods_dir = Path(server_metadata["folder"]) / "client_mods"
     zip_path = zipfile.files_dir / x_server_id / "mods.zip"
 
     zipfile.create_zip(zip_path, mods_dir, "mods_hash_key", server_metadata)
 
-    return FileResponse(str(zip_path))
+    return FileResponse(
+        str(zip_path),
+        filename="resourcepacks.zip",
+        media_type="application/zip"
+    )
 
 @router.get("/download-resourcepacks-zip")
-async def download_mods_zip(x_server_id:str = Header(None)):
+async def download_mods_zip(x_server_id:str):
     server_metadata = ServerMetadata.init_Wserver_id(x_server_id)
     mods_dir = Path(server_metadata["folder"]) / "resourcepacks"
     zip_path = zipfile.files_dir / x_server_id / "resourcepacks.zip"
 
     zipfile.create_zip(zip_path, mods_dir, "resourcepacks_hash_key", server_metadata)
 
-    return FileResponse(str(zip_path))
+    return FileResponse(
+        str(zip_path),
+        filename="resourcepacks.zip",
+        media_type="application/zip"
+    )
