@@ -1,7 +1,7 @@
 from pathlib import Path
 from .servers_core import ServerID, VALID_SERVERS
 from .linux_services import ServerService
-from enum import Enum
+from enum import StrEnum
 import asyncio
 import json
 
@@ -10,7 +10,7 @@ app_dir = core_dir.parent
 data_dir = app_dir / "data"
 
 
-class ValidKeys(Enum):
+class ValidKeys(StrEnum):
     DISPLAY_NAME = "display_name"
     SERVICE_NAME = "service_name"
     SERVER_ID = "server_id"
