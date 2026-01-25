@@ -38,8 +38,8 @@ def create_zip(zip_path:Path, src_path:Path, meta_key:str = "", server_metadata:
         build_zip(src_path, zip_path)
         return
     
+    hash_key = compute_files_hash(src_path)
     if zip_path.exists():
-        hash_key = compute_files_hash(src_path)
         if server_metadata.get(meta_key) == hash_key:
             return
     
