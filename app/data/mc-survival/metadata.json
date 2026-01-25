@@ -1,7 +1,7 @@
 {
     "display_name":"Minecraft Survival Server",
     "service_name":"minecraft@survival",
-    "server-id":"mc-survival",
+    "server_id":"mc-survival",
     "server_type":"minecraft",
     "folder":"/srv/minecraft/survival",
     "has_mods":false,
