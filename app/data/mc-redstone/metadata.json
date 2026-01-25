@@ -3,5 +3,8 @@
     "service_name":"minecraft@redstone",
     "server_id":"mc-redstone",
     "server_type":"minecraft",
-    "folder":"/srv/minecraft/redstone"
+    "folder":"/srv/minecraft/redstone",
+    "has_mods":false,
+    "has_resourcepacks":false,
+    "is_runable":true
 }

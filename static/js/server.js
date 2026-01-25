@@ -31,6 +31,22 @@ async function server_restart() {
     _updateStatus()
 }
 
+// Downloadable Files
+async function download_mods() {
+    await fetch(`/api/v1/servers/download-mods-zip`, {
+        headers: {
+            'X-Server-Id':`${SERVER_ID}`
+        }
+    })
+}
+
+async function download_resourcepacks() {
+    await fetch(`/api/v1/servers/download-resourcepacks-zip`, {
+        headers: {
+            'X-Server-Id':`${SERVER_ID}`
+        }
+    })
+}
 
 
 async function _updateStatus() {

@@ -33,21 +33,6 @@ def build_zip(src_dir:Path, zip_path:Path):
 
             z.write(file, arcname=file.name)
 
-def load_metadata(meta_path:Path) -> dict | None:
-    if not meta_path.exists():
-        meta_path.touch()
-        meta_path.write_text(json.dumps({}, indent=4))
-
-    return json.loads(meta_path.read_text())
-
-def save_metadata(meta_path:Path, data:dict):
-    meta_path.write_text(json.dumps(data, indent=4))
-
-def update_metadata(meta_path:Path, data:dict):
-    metadata = load_metadata(meta_path)
-    metadata.update(data)
-    save_metadata(meta_path, metadata)
-
 def create_zip(zip_path:Path, src_path:Path, meta_key:str = "", server_metadata:ServerMetadata = None):
     if server_metadata is None:
         build_zip(src_path, zip_path)

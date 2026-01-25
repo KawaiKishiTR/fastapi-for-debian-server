@@ -3,5 +3,8 @@
     "service_name":"minecraft@survival",
     "server-id":"mc-survival",
     "server_type":"minecraft",
-    "folder":"/srv/minecraft/survival"
+    "folder":"/srv/minecraft/survival",
+    "has_mods":false,
+    "has_resourcepacks":false,
+    "is_runable":true
 }

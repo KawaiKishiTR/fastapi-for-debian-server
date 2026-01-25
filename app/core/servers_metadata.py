@@ -1,16 +1,31 @@
 from pathlib import Path
+from .servers_core import ServerID, VALID_SERVERS
+from .linux_services import ServerService
+from enum import Enum
+import asyncio
 import json
-from typing import Literal
 
 core_dir = Path(__file__).parent
 app_dir = core_dir.parent
 data_dir = app_dir / "data"
 
+
+class ValidKeys(Enum):
+    DISPLAY_NAME = "display_name"
+    SERVICE_NAME = "service_name"
+    SERVER_ID = "server_id"
+    SERVER_TYPE = "server_type"
+    FOLDER = "folder"
+
+    HAS_MODS = "has_mods"
+    HAS_RESOURCEPACKS = "has_resourcepacks"
+    IS_RUNABLE = "is_runable"
+    RUNNING_SERVER_NAME = "running_server_name"
+
+
 class ServerMetadata:
-    type ValidServerIds = Literal["mc-survival", "mc-redstone", "mc-sweet", "fc-vanilla", "fc-krastorio2"]
-    type ValidKeys = Literal["display_name", "service_name", "server_id", "server_type", "folder"]
     @classmethod
-    def init_Wserver_id(cls, server_id:ValidServerIds):
+    def init_Wserver_id(cls, server_id:ServerID):
         data_file = data_dir / server_id / "metadata.json"
         return cls.init_Wmetadata_file(data_file)
 
@@ -47,3 +62,32 @@ class ServerMetadata:
         
         self.file_path.write_text(json.dumps(self.data, indent=4))
 
+    async def page_init(self):
+        result = {}
+
+        result[ValidKeys.HAS_MODS] = self.get(ValidKeys.HAS_MODS, False)
+        result[ValidKeys.HAS_RESOURCEPACKS] = self.get(ValidKeys.HAS_RESOURCEPACKS, False)
+        result[ValidKeys.IS_RUNABLE] = self.get(ValidKeys.IS_RUNABLE, False)
+        result[ValidKeys.RUNNING_SERVER_NAME] = None
+
+        running_server_name = await is_there_any_running_server(self.get(ValidKeys.SERVER_ID))
+        if running_server_name is not None:
+            result[ValidKeys.IS_RUNABLE] = False
+            result[ValidKeys.RUNNING_SERVER_NAME] = running_server_name
+        
+        return result
+
+async def is_there_any_running_server(this_server_id:str):
+    for server_id in VALID_SERVERS:
+        if server_id == this_server_id:
+            continue
+
+        server_metadata = ServerMetadata.init_Wserver_id(server_id)
+        linux_service = ServerService(server_metadata.get(ValidKeys.SERVICE_NAME))
+
+        if await linux_service.is_active():
+            return server_metadata.get(ValidKeys.DISPLAY_NAME)
+    return None
+
+
+        

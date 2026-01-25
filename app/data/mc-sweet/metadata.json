@@ -3,5 +3,8 @@
     "service_name":"minecraft@sweet",
     "server_id":"mc-sweet",
     "server_type":"minecraft",
-    "folder":"/srv/minecraft/sweet"
+    "folder":"/srv/minecraft/sweet",
+    "has_mods":true,
+    "has_resourcepacks":true,
+    "is_runable":true
 }

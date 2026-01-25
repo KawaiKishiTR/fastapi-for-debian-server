@@ -13,13 +13,29 @@
             <h2 id="controls-title" class="section-title">Sunucu Kontrolleri</h2>
 
             <div class="flex flex-row gap-10" role="group" aria-label="Sunucu komutları">
-                <button id="startBtn" class="btn" type="button" aria-pressed="false", onclick="server_start()">Sunucuyu Başlat</button>
-                <button id="stopBtn" class="btn" type="button" aria-pressed="false", onclick="server_stop()">Sunucuyu Durdur</button>
-                <button id="restartBtn" class="btn" type="button" aria-pressed="false", onclick="server_restart()">Sunucuyu Yeniden Başlat</button>
-                {% if service_name == "minecraft@sweet" %}
-                <button id="DownloadModsZipBtn" class="btn" type="button" aria-pressed="false", onclick="window.location.href='{{ api_base }}/api/download-mods-zip'">Mod Paketi İndir</button>
-                <button id="DownloadResourcePacksZipBtn" class="btn" type="button" aria-pressed="false", onclick="window.location.href='{{ api_base }}/api/download-resourcepacks-zip'">Kaynak Paketi İndir</button>
+                {% if metadata.is_runable %}
+                <button id="startBtn" class="btn" type="button" aria-pressed="false" onclick="server_start()">Sunucuyu Başlat</button>
+                <button id="stopBtn" class="btn" type="button" aria-pressed="false" onclick="server_stop()">Sunucuyu Durdur</button>
+                <button id="restartBtn" class="btn" type="button" aria-pressed="false" onclick="server_restart()">Sunucuyu Yeniden Başlat</button>
+                {% else %}
+                <button class="btn" type="button" aria-pressed="false">
+                    {% if metadata.running_server_name %}
+                        {{ metadata.running_server_name }} — Çalışıyor, önce onu kapatın
+                    {% else %}
+                        Çalışan Server Yok. Bunu görüyorsanız bildirin
+                    {% endif %}
+                    </button>
                 {% endif %}
+                <br>
+                
+                {% if metadata.has_mods %}
+                <button id="DownloadModsZipBtn" class="btn" type="button" aria-pressed="false", onclick="download_mods()">Mod Paketi İndir</button>
+                {% endif %}
+                
+                {% if metadata.has_resourcepacks %}
+                <button id="DownloadResourcePacksZipBtn" class="btn" type="button" aria-pressed="false", onclick="download_resourcepacks()">Kaynak Paketi İndir</button>
+                {% endif %}
+
             </div>
         </section>
 

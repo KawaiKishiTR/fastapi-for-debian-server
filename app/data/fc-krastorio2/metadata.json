@@ -3,5 +3,8 @@
     "service_name":"factorio@krastorio2",
     "server_id":"fc-krastorio2",
     "server_type":"factorio",
-    "folder":"/srv/factorio/krastorio2"
+    "folder":"/srv/factorio/krastorio2",
+    "has_mods":true,
+    "has_resourcepacks":false,
+    "is_runable":true
 }
