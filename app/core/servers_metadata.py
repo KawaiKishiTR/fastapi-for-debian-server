@@ -68,6 +68,7 @@ class ServerMetadata:
     async def page_init(self):
         result = {}
 
+        result[ValidKeys.DISPLAY_NAME] = self.get(ValidKeys.DISPLAY_NAME)
         result[ValidKeys.HAS_MODS] = self.get(ValidKeys.HAS_MODS, False)
         result[ValidKeys.HAS_RESOURCEPACKS] = self.get(ValidKeys.HAS_RESOURCEPACKS, False)
         result[ValidKeys.HAS_QUERY] = self.get(ValidKeys.HAS_QUERY, False)
