@@ -4,6 +4,9 @@
 
 <script src="/static/js/server.js" defer></script>
 <script src="/static/js/logs.js" defer></script>
+{% if metadata.has_query %}
+<script src="/static/js/query.js" defer></script>
+{% endif %}
 
 <main role="main" class="p-20">
     <div class="top-sections">
@@ -18,7 +21,7 @@
                 <button id="stopBtn" class="btn" type="button" aria-pressed="false" onclick="server_stop()">Sunucuyu Durdur</button>
                 <button id="restartBtn" class="btn" type="button" aria-pressed="false" onclick="server_restart()">Sunucuyu Yeniden Başlat</button>
                 {% else %}
-                <button class="btn" type="button" aria-pressed="false">
+                <button class="btn" type="button" aria-pressed="false" onclick="window.location.href='/servers/{{ metadata.running_server_id }}'">
                     {% if metadata.running_server_name %}
                         {{ metadata.running_server_name }} — Çalışıyor, önce onu kapatın
                     {% else %}
@@ -38,6 +41,20 @@
 
             </div>
         </section>
+        
+        {% if metadata.has_query %}
+        <!-- Query gösteren bölüm -->
+        <section class="card" aria-labelledby="controls-title">
+            <h2 id="controls-title", class="section-title">Query Data</h2>
+            <div class="flex flex-row gap-10" role="group" aria-label="Aktif Oyuncular">
+
+            </div>
+        </section>
+
+
+
+        {% endif %}
+        
 
         <!-- Grafikleri gösteren bölüm -->
         <section class="card charts" aria-labelledby="charts-title">
