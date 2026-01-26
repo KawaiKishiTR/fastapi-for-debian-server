@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from app.routers import root, servers
 from app.api import main as api
 from app.lifespan import lifespan
-from core.minecraft_query import create_workers
+from app.core.minecraft_query import create_workers
 
 
 app = FastAPI(lifespan=lifespan)
