@@ -38,7 +38,6 @@ function download_mods() {
 
 async function download_resourcepacks() {
     window.location.href = `/api/v1/servers/download-resourcepacks-zip?x_server_id=${SERVER_ID}`;
-
 }
 
 async function _updateStatus() {

@@ -19,8 +19,11 @@ class ValidKeys(StrEnum):
 
     HAS_MODS = "has_mods"
     HAS_RESOURCEPACKS = "has_resourcepacks"
+    HAS_QUERY = "has_query"
+    QUERY_PORT = "query_port"
     IS_RUNABLE = "is_runable"
     RUNNING_SERVER_NAME = "running_server_name"
+    RUNNING_SERVER_ID = "running_server_id"
 
 
 class ServerMetadata:
@@ -67,14 +70,16 @@ class ServerMetadata:
 
         result[ValidKeys.HAS_MODS] = self.get(ValidKeys.HAS_MODS, False)
         result[ValidKeys.HAS_RESOURCEPACKS] = self.get(ValidKeys.HAS_RESOURCEPACKS, False)
+        result[ValidKeys.HAS_QUERY] = self.get(ValidKeys.HAS_QUERY, False)
         result[ValidKeys.IS_RUNABLE] = self.get(ValidKeys.IS_RUNABLE, False)
         result[ValidKeys.RUNNING_SERVER_NAME] = None
+        result[ValidKeys.RUNNING_SERVER_ID] = None
 
-        running_server_name = await is_there_any_running_server(self.get(ValidKeys.SERVER_ID))
+        running_server_id, running_server_name = await is_there_any_running_server(self.get(ValidKeys.SERVER_ID))
         if running_server_name is not None:
             result[ValidKeys.IS_RUNABLE] = False
             result[ValidKeys.RUNNING_SERVER_NAME] = running_server_name
-        
+            result[ValidKeys.RUNNING_SERVER_ID] = running_server_id
         return result
 
 async def is_there_any_running_server(this_server_id:str):
@@ -89,8 +94,8 @@ async def is_there_any_running_server(this_server_id:str):
         print(server_metadata)
 
         if await linux_service.is_active():
-            return server_metadata.get(ValidKeys.DISPLAY_NAME)
-    return None
+            return server_metadata.get(ValidKeys.SERVER_ID), server_metadata.get(ValidKeys.DISPLAY_NAME)
+    return None, None
 
 
         

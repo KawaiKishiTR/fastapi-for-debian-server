@@ -1,13 +1,18 @@
 import asyncio
 from ..core.log_stream import linux_service_log_stream
-from ..core.servers_metadata import ServerMetadata
+from ..core.servers_metadata import ServerMetadata, ValidKeys
 from ..core.linux_services import ServerService
 from ..core import zip_file_service as zipfile
-from fastapi import APIRouter, Header, HTTPException
-from pathlib import Path
+from ..core.minecraft_query import MCQueryWorker
 from fastapi.responses import FileResponse, StreamingResponse
+from fastapi import APIRouter, Header, HTTPException
+from time import strftime
+from pathlib import Path
 
 router = APIRouter()
+
+def get_file_time_name():
+    return strftime("%Y-%m-%d.%H-%M")
 
 ### STATUS BAR
 @router.get("/status")
@@ -17,7 +22,13 @@ async def get_status(x_server_id: str = Header(...)):
         service_name = meta["service_name"]
 
         active = await ServerService(service_name).is_active()
-
+        if meta.get(ValidKeys.HAS_QUERY):
+            worker = MCQueryWorker.workers.get(x_server_id)
+            if active and not worker.is_running():
+                worker.start()
+            elif not active and worker.is_running():
+                worker.stop()
+            
         return {"active": active}
 
     except Exception as e:
@@ -60,7 +71,7 @@ async def download_mods_zip(x_server_id:str):
 
     return FileResponse(
         str(zip_path),
-        filename="resourcepacks.zip",
+        filename=f"mods-{get_file_time_name()}.zip",
         media_type="application/zip"
     )
 
@@ -74,6 +85,14 @@ async def download_mods_zip(x_server_id:str):
 
     return FileResponse(
         str(zip_path),
-        filename="resourcepacks.zip",
+        filename=f"resourcepacks-{get_file_time_name()}.zip",
         media_type="application/zip"
     )
+
+@router.get("/get-query-data")
+async def get_query_data(x_server_id:str):
+    worker = MCQueryWorker.workers.get(x_server_id)
+    if worker is None:
+        raise HTTPException(404, "query worker not found")
+    
+    return worker.get_cache()
