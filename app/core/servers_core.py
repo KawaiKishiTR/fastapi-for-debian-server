@@ -6,6 +6,7 @@ class ServerID(Enum):
     MC_REDSTONE = "mc-redstone"
     MC_SWEET = "mc-sweet"
     MC_FORGEPACK = "mc-forgepack"
+    MC_RECLAMATION = "mc-reclamation"
 
     FC_VANILLA = "fc-vanilla"
     FC_KRASTORIO2 = "fc-krastorio2"

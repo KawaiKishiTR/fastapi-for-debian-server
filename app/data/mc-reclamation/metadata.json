@@ -1,0 +1,10 @@
+{
+    "display_name":"Minecraft Reclamation Server",
+    "service_name":"minecraft@reclamation",
+    "server_id":"mc-reclamation",
+    "server_type":"minecraft",
+    "folder":"/srv/minecraft/reclamation",
+    "has_mods":true,
+    "has_resourcepacks":false,
+    "is_runable":true
+}
