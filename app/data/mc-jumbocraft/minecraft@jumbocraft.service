@@ -1,0 +1,12 @@
+[Unit]
+Description=Minecraft Jumbocraft Server
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/srv/minecraft/jumbocraft/
+ExecStart=/srv/minecraft/jumbocraft/run.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
