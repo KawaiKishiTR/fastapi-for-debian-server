@@ -1,0 +1,10 @@
+{
+    "display_name":"Minecraft Jumbocraft Server",
+    "service_name":"minecraft@jumbocraft",
+    "server_id":"mc-jumbocraft",
+    "server_type":"minecraft",
+    "folder":"/srv/minecraft/jumbocraft",
+    "has_mods":true,
+    "has_resourcepacks":false,
+    "is_runable":true
+}
