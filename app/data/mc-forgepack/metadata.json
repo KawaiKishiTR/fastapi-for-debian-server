@@ -1,10 +1,11 @@
 {
-    "display_name":"Minecraft Forge Server",
-    "service_name":"minecraft@forgepack",
-    "server_id":"mc-forgepack",
-    "server_type":"minecraft",
-    "folder":"/srv/minecraft/forge-1-16-5",
-    "has_mods":true,
-    "has_resourcepacks":false,
-    "is_runable":true
+    "display_name": "Minecraft Forge Server",
+    "service_name": "minecraft@forgepack",
+    "server_id": "mc-forgepack",
+    "server_type": "minecraft",
+    "folder": "/srv/minecraft/forge-1-16-5",
+    "has_mods": true,
+    "has_resourcepacks": false,
+    "is_runable": true,
+    "mods_hash_key": "ba84d931abe19a8a25997b47bb78a82ee3efc871746578fc6cb451501cec79a1"
 }

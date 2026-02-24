@@ -1,0 +1,19 @@
+[Unit]
+Description=factorio vanilla server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=factorio
+WorkingDirectory=/srv/factorio/vanilla
+PrivateNetwork=no
+
+ExecStart=/srv/factorio/vanilla/bin/x64/factorio \
+  --server-settings /srv/factorio/vanilla/data/server-settings.json \
+  --start-server /srv/factorio/vanilla/saves/multiplayer.zip
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

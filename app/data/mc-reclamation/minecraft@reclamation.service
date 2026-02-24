@@ -1,0 +1,12 @@
+[Unit]
+Description=Minecraft Reclamation Service
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/srv/minecraft/reclamation/
+ExecStart=/srv/minecraft/reclamation/run.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Minecraft Sweet Server
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/srv/minecraft/forge-1-16-5/
+ExecStart=/srv/minecraft/forge-1-16-5/start_server.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Minecraft Restone Server
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/srv/minecraft/redstone
+ExecStart=/usr/bin/java -Xms2G -Xmx6G -XX:+UseG1GC -jar /srv/minecraft/redstone/fabric-1.20.4.jar nogui
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,10 +1,12 @@
 {
-    "display_name":"Minecraft Sweet Server",
-    "service_name":"minecraft@sweet",
-    "server_id":"mc-sweet",
-    "server_type":"minecraft",
-    "folder":"/srv/minecraft/sweet",
-    "has_mods":true,
-    "has_resourcepacks":true,
-    "is_runable":true
+    "display_name": "Minecraft Sweet Server",
+    "service_name": "minecraft@sweet",
+    "server_id": "mc-sweet",
+    "server_type": "minecraft",
+    "folder": "/srv/minecraft/sweet",
+    "has_mods": true,
+    "has_resourcepacks": true,
+    "is_runable": true,
+    "mods_hash_key": "6db65ffb4036cbde7d316e67332762a5fc7865c706968506a6e1c54f9ac20cf3",
+    "resourcepacks_hash_key": "758bd5dbd5627ec6c9f0b375ea0683bfd4e23564ca558dbfbf17f22f533b9bb1"
 }

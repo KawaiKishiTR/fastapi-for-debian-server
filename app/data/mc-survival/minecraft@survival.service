@@ -1,0 +1,12 @@
+[Unit]
+Description=Minecraft Survival Server
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/srv/minecraft/survival
+ExecStart=/usr/bin/java -Xms2G -Xmx8G -XX:+UseG1GC -jar /srv/minecraft/survival/fabric_1.20.4.jar nogui
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

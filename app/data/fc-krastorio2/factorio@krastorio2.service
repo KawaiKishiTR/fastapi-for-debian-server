@@ -1,0 +1,13 @@
+[Unit]
+Description=factorio vanilla server
+After=network.target
+
+[Service]
+User=factorio
+WorkingDirectory=/srv/factorio/krastorio2
+ExecStart=/srv/factorio/krastorio2/bin/x64/factorio --start-server save.zip
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
